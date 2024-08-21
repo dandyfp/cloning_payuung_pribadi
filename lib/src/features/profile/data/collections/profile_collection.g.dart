@@ -92,48 +92,63 @@ const ProfileCollectionSchema = CollectionSchema(
       name: r'grossIncomePerYear',
       type: IsarType.string,
     ),
-    r'identityCardNumber': PropertySchema(
+    r'identityCardFileName': PropertySchema(
       id: 15,
+      name: r'identityCardFileName',
+      type: IsarType.string,
+    ),
+    r'identityCardNumber': PropertySchema(
+      id: 16,
       name: r'identityCardNumber',
       type: IsarType.string,
     ),
     r'nameOwnerBank': PropertySchema(
-      id: 16,
+      id: 17,
       name: r'nameOwnerBank',
       type: IsarType.string,
     ),
     r'phoneNumber': PropertySchema(
-      id: 17,
+      id: 18,
       name: r'phoneNumber',
       type: IsarType.string,
     ),
+    r'photoProfile': PropertySchema(
+      id: 19,
+      name: r'photoProfile',
+      type: IsarType.longList,
+    ),
     r'poscode': PropertySchema(
-      id: 18,
+      id: 20,
       name: r'poscode',
       type: IsarType.string,
     ),
     r'potitionInCompany': PropertySchema(
-      id: 19,
+      id: 21,
       name: r'potitionInCompany',
       type: IsarType.string,
     ),
     r'province': PropertySchema(
-      id: 20,
+      id: 22,
       name: r'province',
       type: IsarType.string,
     ),
     r'sourceIncome': PropertySchema(
-      id: 21,
+      id: 23,
       name: r'sourceIncome',
       type: IsarType.string,
     ),
     r'statusMarried': PropertySchema(
-      id: 22,
+      id: 24,
       name: r'statusMarried',
       type: IsarType.string,
     ),
+    r'subDistrict': PropertySchema(
+      id: 25,
+      name: r'subDistrict',
+      type: IsarType.string,
+    ),
     r'vilage': PropertySchema(
-      id: 23,
+      id: 26,
       name: r'vilage',
       type: IsarType.string,
     )
@@ -249,6 +264,12 @@ int _profileCollectionEstimateSize(
     }
   }
   {
+    final value = object.identityCardFileName;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.identityCardNumber;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -264,6 +285,12 @@ int _profileCollectionEstimateSize(
     final value = object.phoneNumber;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.photoProfile;
+    if (value != null) {
+      bytesCount += 3 + value.length * 8;
     }
   }
   {
@@ -292,6 +319,12 @@ int _profileCollectionEstimateSize(
   }
   {
     final value = object.statusMarried;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.subDistrict;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -326,15 +359,18 @@ void _profileCollectionSerialize(
   writer.writeString(offsets[12], object.fullName);
   writer.writeString(offsets[13], object.gender);
   writer.writeString(offsets[14], object.grossIncomePerYear);
-  writer.writeString(offsets[15], object.identityCardNumber);
-  writer.writeString(offsets[16], object.nameOwnerBank);
-  writer.writeString(offsets[17], object.phoneNumber);
-  writer.writeString(offsets[18], object.poscode);
-  writer.writeString(offsets[19], object.potitionInCompany);
-  writer.writeString(offsets[20], object.province);
-  writer.writeString(offsets[21], object.sourceIncome);
-  writer.writeString(offsets[22], object.statusMarried);
-  writer.writeString(offsets[23], object.vilage);
+  writer.writeString(offsets[15], object.identityCardFileName);
+  writer.writeString(offsets[16], object.identityCardNumber);
+  writer.writeString(offsets[17], object.nameOwnerBank);
+  writer.writeString(offsets[18], object.phoneNumber);
+  writer.writeLongList(offsets[19], object.photoProfile);
+  writer.writeString(offsets[20], object.poscode);
+  writer.writeString(offsets[21], object.potitionInCompany);
+  writer.writeString(offsets[22], object.province);
+  writer.writeString(offsets[23], object.sourceIncome);
+  writer.writeString(offsets[24], object.statusMarried);
+  writer.writeString(offsets[25], object.subDistrict);
+  writer.writeString(offsets[26], object.vilage);
 }
 
 ProfileCollection _profileCollectionDeserialize(
@@ -348,27 +384,30 @@ ProfileCollection _profileCollectionDeserialize(
     reader.readStringOrNull(offsets[12]),
     reader.readStringOrNull(offsets[10]),
     reader.readStringOrNull(offsets[6]),
-    reader.readStringOrNull(offsets[17]),
+    reader.readStringOrNull(offsets[18]),
     reader.readStringOrNull(offsets[13]),
     reader.readStringOrNull(offsets[9]),
+    reader.readStringOrNull(offsets[24]),
+    reader.readStringOrNull(offsets[16]),
     reader.readStringOrNull(offsets[22]),
-    reader.readStringOrNull(offsets[15]),
-    reader.readStringOrNull(offsets[20]),
     reader.readStringOrNull(offsets[1]),
     reader.readStringOrNull(offsets[11]),
     reader.readStringOrNull(offsets[7]),
-    reader.readStringOrNull(offsets[23]),
-    reader.readStringOrNull(offsets[18]),
+    reader.readStringOrNull(offsets[26]),
+    reader.readStringOrNull(offsets[20]),
     reader.readStringOrNull(offsets[5]),
     reader.readStringOrNull(offsets[0]),
-    reader.readStringOrNull(offsets[19]),
+    reader.readStringOrNull(offsets[21]),
     reader.readStringOrNull(offsets[8]),
     reader.readStringOrNull(offsets[2]),
     reader.readStringOrNull(offsets[3]),
-    reader.readStringOrNull(offsets[16]),
+    reader.readStringOrNull(offsets[17]),
     reader.readStringOrNull(offsets[4]),
-    reader.readStringOrNull(offsets[21]),
+    reader.readStringOrNull(offsets[23]),
     reader.readStringOrNull(offsets[14]),
+    reader.readStringOrNull(offsets[15]),
+    reader.readStringOrNull(offsets[25]),
+    reader.readLongList(offsets[19]),
   );
   return object;
 }
@@ -419,7 +458,7 @@ P _profileCollectionDeserializeProp<P>(
     case 18:
       return (reader.readStringOrNull(offset)) as P;
     case 19:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readLongList(offset)) as P;
     case 20:
       return (reader.readStringOrNull(offset)) as P;
     case 21:
@@ -427,6 +466,12 @@ P _profileCollectionDeserializeProp<P>(
     case 22:
       return (reader.readStringOrNull(offset)) as P;
     case 23:
+      return (reader.readStringOrNull(offset)) as P;
+    case 24:
+      return (reader.readStringOrNull(offset)) as P;
+    case 25:
+      return (reader.readStringOrNull(offset)) as P;
+    case 26:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -2896,6 +2941,160 @@ extension ProfileCollectionQueryFilter
   }
 
   QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      identityCardFileNameIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'identityCardFileName',
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      identityCardFileNameIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'identityCardFileName',
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      identityCardFileNameEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'identityCardFileName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      identityCardFileNameGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'identityCardFileName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      identityCardFileNameLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'identityCardFileName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      identityCardFileNameBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'identityCardFileName',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      identityCardFileNameStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'identityCardFileName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      identityCardFileNameEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'identityCardFileName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      identityCardFileNameContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'identityCardFileName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      identityCardFileNameMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'identityCardFileName',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      identityCardFileNameIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'identityCardFileName',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      identityCardFileNameIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'identityCardFileName',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
       identityCardNumberIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -3354,6 +3553,169 @@ extension ProfileCollectionQueryFilter
         property: r'phoneNumber',
         value: '',
       ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      photoProfileIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'photoProfile',
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      photoProfileIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'photoProfile',
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      photoProfileElementEqualTo(int value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'photoProfile',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      photoProfileElementGreaterThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'photoProfile',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      photoProfileElementLessThan(
+    int value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'photoProfile',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      photoProfileElementBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'photoProfile',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      photoProfileLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'photoProfile',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      photoProfileIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'photoProfile',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      photoProfileIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'photoProfile',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      photoProfileLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'photoProfile',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      photoProfileLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'photoProfile',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      photoProfileLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'photoProfile',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -4128,6 +4490,160 @@ extension ProfileCollectionQueryFilter
   }
 
   QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      subDistrictIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'subDistrict',
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      subDistrictIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'subDistrict',
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      subDistrictEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'subDistrict',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      subDistrictGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'subDistrict',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      subDistrictLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'subDistrict',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      subDistrictBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'subDistrict',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      subDistrictStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'subDistrict',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      subDistrictEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'subDistrict',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      subDistrictContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'subDistrict',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      subDistrictMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'subDistrict',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      subDistrictIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'subDistrict',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
+      subDistrictIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'subDistrict',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterFilterCondition>
       vilageIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
@@ -4501,6 +5017,20 @@ extension ProfileCollectionQuerySortBy
   }
 
   QueryBuilder<ProfileCollection, ProfileCollection, QAfterSortBy>
+      sortByIdentityCardFileName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'identityCardFileName', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterSortBy>
+      sortByIdentityCardFileNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'identityCardFileName', Sort.desc);
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterSortBy>
       sortByIdentityCardNumber() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'identityCardNumber', Sort.asc);
@@ -4609,6 +5139,20 @@ extension ProfileCollectionQuerySortBy
       sortByStatusMarriedDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'statusMarried', Sort.desc);
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterSortBy>
+      sortBySubDistrict() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'subDistrict', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterSortBy>
+      sortBySubDistrictDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'subDistrict', Sort.desc);
     });
   }
 
@@ -4853,6 +5397,20 @@ extension ProfileCollectionQuerySortThenBy
   }
 
   QueryBuilder<ProfileCollection, ProfileCollection, QAfterSortBy>
+      thenByIdentityCardFileName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'identityCardFileName', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterSortBy>
+      thenByIdentityCardFileNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'identityCardFileName', Sort.desc);
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterSortBy>
       thenByIdentityCardNumber() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'identityCardNumber', Sort.asc);
@@ -4961,6 +5519,20 @@ extension ProfileCollectionQuerySortThenBy
       thenByStatusMarriedDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'statusMarried', Sort.desc);
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterSortBy>
+      thenBySubDistrict() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'subDistrict', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QAfterSortBy>
+      thenBySubDistrictDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'subDistrict', Sort.desc);
     });
   }
 
@@ -5090,6 +5662,14 @@ extension ProfileCollectionQueryWhereDistinct
   }
 
   QueryBuilder<ProfileCollection, ProfileCollection, QDistinct>
+      distinctByIdentityCardFileName({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'identityCardFileName',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QDistinct>
       distinctByIdentityCardNumber({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'identityCardNumber',
@@ -5109,6 +5689,13 @@ extension ProfileCollectionQueryWhereDistinct
       distinctByPhoneNumber({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'phoneNumber', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QDistinct>
+      distinctByPhotoProfile() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'photoProfile');
     });
   }
 
@@ -5146,6 +5733,13 @@ extension ProfileCollectionQueryWhereDistinct
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'statusMarried',
           caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<ProfileCollection, ProfileCollection, QDistinct>
+      distinctBySubDistrict({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'subDistrict', caseSensitive: caseSensitive);
     });
   }
 
@@ -5269,6 +5863,13 @@ extension ProfileCollectionQueryProperty
   }
 
   QueryBuilder<ProfileCollection, String?, QQueryOperations>
+      identityCardFileNameProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'identityCardFileName');
+    });
+  }
+
+  QueryBuilder<ProfileCollection, String?, QQueryOperations>
       identityCardNumberProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'identityCardNumber');
@@ -5286,6 +5887,13 @@ extension ProfileCollectionQueryProperty
       phoneNumberProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'phoneNumber');
+    });
+  }
+
+  QueryBuilder<ProfileCollection, List<int>?, QQueryOperations>
+      photoProfileProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'photoProfile');
     });
   }
 
@@ -5320,6 +5928,13 @@ extension ProfileCollectionQueryProperty
       statusMarriedProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'statusMarried');
+    });
+  }
+
+  QueryBuilder<ProfileCollection, String?, QQueryOperations>
+      subDistrictProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'subDistrict');
     });
   }
 

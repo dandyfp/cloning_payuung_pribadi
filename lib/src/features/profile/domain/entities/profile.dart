@@ -1,7 +1,9 @@
+
 import 'package:equatable/equatable.dart';
 
 class Profile extends Equatable {
   final int? id;
+
   final String? fullName;
   final String? email;
   final String? dateOfBirth;
@@ -10,7 +12,9 @@ class Profile extends Equatable {
   final String? education;
   final String? statusMarried;
   final String? identityCardNumber;
+
   final String? province;
+
   final String? addressIdentityCard;
   final String? fullAddress;
   final String? district;
@@ -26,6 +30,9 @@ class Profile extends Equatable {
   final String? branchBank;
   final String? sourceIncome;
   final String? grossIncomePerYear;
+  final String? identityCardFileName;
+  final String? subDistrict;
+  final List<int>? photoProfile;
   const Profile({
     this.id,
     this.fullName,
@@ -52,6 +59,9 @@ class Profile extends Equatable {
     this.branchBank,
     this.sourceIncome,
     this.grossIncomePerYear,
+    this.identityCardFileName,
+    this.subDistrict,
+    this.photoProfile,
   });
 
   @override
@@ -81,5 +91,9 @@ class Profile extends Equatable {
         branchBank,
         sourceIncome,
         grossIncomePerYear,
+        subDistrict,
+        identityCardFileName,
+        identityCardNumber,
+        photoProfile,
       ];
 }

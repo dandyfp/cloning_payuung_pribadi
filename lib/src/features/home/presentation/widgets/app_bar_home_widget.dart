@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:cloning_payuung_pribadi/src/features/profile/presentation/pages/profile_page.dart';
 import 'package:cloning_payuung_pribadi/src/shared_ui/style/app_colors.dart';
 import 'package:cloning_payuung_pribadi/src/shared_ui/style/app_dimens.dart';
@@ -8,7 +10,12 @@ import 'package:flutter/material.dart';
 
 class AppBarHomeWidget extends StatelessWidget implements PreferredSizeWidget {
   final String? userName;
-  const AppBarHomeWidget({super.key, this.userName});
+  final List<int> image;
+  const AppBarHomeWidget({
+    super.key,
+    this.userName,
+    required this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +32,7 @@ class AppBarHomeWidget extends StatelessWidget implements PreferredSizeWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Selamat sore',
+                  getGreeting(),
                   style:
                       whiteRegularTextStyle.copyWith(fontSize: AppDimens.textS),
                 ),
@@ -49,14 +56,28 @@ class AppBarHomeWidget extends StatelessWidget implements PreferredSizeWidget {
                     context,
                     const ProfilePage(),
                   ),
-                  child: const CircleAvatar(
-                    radius: 20.0,
-                    backgroundColor: AppColors.greySoft,
-                    child: Icon(
-                      Icons.person,
-                      color: AppColors.grey,
-                    ),
-                  ),
+                  child: image.isEmpty
+                      ? const CircleAvatar(
+                          radius: 20.0,
+                          backgroundColor: AppColors.greySoft,
+                          child: Icon(
+                            Icons.person,
+                            color: AppColors.grey,
+                          ),
+                        )
+                      : Container(
+                          height: 35,
+                          width: 35,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: MemoryImage(
+                                Uint8List.fromList(image),
+                              ),
+                            ),
+                          ),
+                        ),
                 ),
               ],
             )
@@ -64,6 +85,22 @@ class AppBarHomeWidget extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
     );
+  }
+
+  String getGreeting() {
+    final hour = DateTime.now().hour;
+
+    if (hour >= 5 && hour < 12) {
+      return "Selamat Pagi";
+    } else if (hour >= 12 && hour < 15) {
+      return "Selamat Siang";
+    } else if (hour >= 15 && hour < 18) {
+      return "Selamat Sore";
+    } else if (hour >= 18 && hour < 24) {
+      return "Selamat Malam";
+    } else {
+      return "Selamat Tidur";
+    }
   }
 
   @override

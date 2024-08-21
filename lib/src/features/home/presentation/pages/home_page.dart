@@ -32,44 +32,53 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return BlocBuilder<GetUserBloc, GetUserState>(
       builder: (context, state) {
+        ProfileModel profileModel = const ProfileModel(
+          fullName: 'Guest',
+          dateOfBirth: '',
+          gender: '',
+          email: '',
+          phoneNumber: '',
+          education: '',
+          statusMarried: '',
+          addressCompany: '',
+          addressIdentityCard: '',
+          bankName: '',
+          bankNumber: '',
+          branchBank: '',
+          companyName: '',
+          district: '',
+          durationWork: '',
+          fullAddress: '',
+          grossIncomePerYear: '',
+          identityCardNumber: '',
+          nameOwnerBank: '',
+          poscode: '',
+          potitionInCompany: '',
+          province: '',
+          sourceIncome: '',
+          vilage: '',
+          id: 1,
+          subDistrict: '',
+          identityCardFileName: '',
+        );
         if (state is GetUserLoaded) {
           if (state.profile != null) {
             dataProfile = state.profile;
           } else {
-            ProfileModel profileModel = const ProfileModel(
-              fullName: 'Guest',
-              dateOfBirth: '',
-              gender: '',
-              email: '',
-              phoneNumber: '',
-              education: '',
-              statusMarried: '',
-              addressCompany: '',
-              addressIdentityCard: '',
-              bankName: '',
-              bankNumber: '',
-              branchBank: '',
-              companyName: '',
-              district: '',
-              durationWork: '',
-              fullAddress: '',
-              grossIncomePerYear: '',
-              identityCardNumber: '',
-              nameOwnerBank: '',
-              poscode: '',
-              potitionInCompany: '',
-              province: '',
-              sourceIncome: '',
-              vilage: '',
-              id: 1,
-            );
-
             context.read<ProfileBloc>().add(CreateUserEvent(profileModel));
           }
+        }
+        if (state is GetUserError) {
+          context.read<ProfileBloc>().add(CreateUserEvent(profileModel));
+          Future.delayed(
+            Durations.long2,
+            () => context.read<GetUserBloc>().add(const GetUserProfileEvent(1)),
+          );
         }
         return Scaffold(
           backgroundColor: AppColors.primary,
           appBar: AppBarHomeWidget(
+            image: dataProfile?.photoProfile ?? [],
             userName: dataProfile?.fullName ?? '',
           ),
           body: Stack(

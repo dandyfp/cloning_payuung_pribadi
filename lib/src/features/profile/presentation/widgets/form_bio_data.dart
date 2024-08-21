@@ -57,10 +57,18 @@ class _FormBioDataState extends State<FormBioData> {
           fullNameController.text = state.profile?.fullName ?? '';
           emailController.text = state.profile?.email ?? '';
           phoneController.text = state.profile?.phoneNumber ?? '';
-          dateOfBirthController.text = state.profile?.dateOfBirth ?? '';
-          selectedValueMarried = state.profile?.statusMarried;
-          selectedValueGender = state.profile?.gender;
-          selectedValueEducation = state.profile?.education;
+          if (state.profile?.dateOfBirth != '') {
+            dateOfBirthController.text = state.profile?.dateOfBirth ?? '';
+          }
+          if (state.profile?.statusMarried != '') {
+            selectedValueMarried = state.profile?.statusMarried;
+          }
+          if (state.profile?.gender != '') {
+            selectedValueGender = state.profile?.gender;
+          }
+          if (state.profile?.education != '') {
+            selectedValueEducation = state.profile?.education;
+          }
         }
         return Column(
           children: [
@@ -203,9 +211,7 @@ class _FormBioDataState extends State<FormBioData> {
                   dropdownColor: AppColors.white,
                   value: selectedValueEducation,
                   onChanged: (val) {
-                    setState(() {
-                      education = val;
-                    });
+                    education = val;
                   },
                   items: dropdownItemEducations,
                 ),
@@ -248,9 +254,8 @@ class _FormBioDataState extends State<FormBioData> {
                   dropdownColor: AppColors.white,
                   value: selectedValueMarried,
                   onChanged: (val) {
-                    setState(() {
-                      statusMarried = val;
-                    });
+                    statusMarried = val;
+                    setState(() {});
                   },
                   items: dropdownItemStatusMarrieds,
                 ),

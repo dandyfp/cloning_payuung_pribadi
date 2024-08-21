@@ -1,3 +1,4 @@
+import 'package:cloning_payuung_pribadi/src/features/profile/presentation/bloc/get_user_profile/get_user_bloc.dart';
 import 'package:cloning_payuung_pribadi/src/features/profile/presentation/pages/personal_info_page.dart';
 import 'package:cloning_payuung_pribadi/src/features/profile/presentation/widgets/item_option_profile.dart';
 import 'package:cloning_payuung_pribadi/src/features/profile/presentation/widgets/profile_image.dart';
@@ -8,6 +9,7 @@ import 'package:cloning_payuung_pribadi/src/shared_ui/style/app_dimens.dart';
 import 'package:cloning_payuung_pribadi/src/shared_ui/style/app_style.dart';
 import 'package:cloning_payuung_pribadi/src/shared_ui/ui_helpers.dart';
 import 'package:cloning_payuung_pribadi/src/utils/navigator_helper.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -23,12 +25,14 @@ class ProfilePage extends StatelessWidget {
         titleSpacing: 0,
         automaticallyImplyLeading: false,
         leading: IconButton(
-          icon: const Icon(
-            Icons.navigate_before,
-            color: AppColors.black,
-          ),
-          onPressed: () => NavigatorHelper.pop(context),
-        ),
+            icon: const Icon(
+              Icons.navigate_before,
+              color: AppColors.black,
+            ),
+            onPressed: () {
+              context.read<GetUserBloc>().add(const GetUserProfileEvent(1));
+              NavigatorHelper.pop(context);
+            }),
         title: Text(
           'Profile',
           style: blackMediumTextStyle.copyWith(

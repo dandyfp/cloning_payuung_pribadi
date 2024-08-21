@@ -30,6 +30,9 @@ class ProfileCollection {
   String? branchBank;
   String? sourceIncome;
   String? grossIncomePerYear;
+  String? identityCardFileName;
+  String? subDistrict;
+  List<int>? photoProfile;
 
   ProfileCollection(
     this.id,
@@ -57,6 +60,9 @@ class ProfileCollection {
     this.branchBank,
     this.sourceIncome,
     this.grossIncomePerYear,
+    this.identityCardFileName,
+    this.subDistrict,
+    this.photoProfile,
   );
 
   toEntity() => Profile(
@@ -85,5 +91,8 @@ class ProfileCollection {
         branchBank: branchBank,
         sourceIncome: sourceIncome,
         grossIncomePerYear: grossIncomePerYear,
+        identityCardFileName: identityCardFileName,
+        subDistrict: subDistrict,
+        photoProfile: photoProfile,
       );
 }

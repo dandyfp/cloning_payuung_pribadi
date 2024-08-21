@@ -27,7 +27,10 @@ class ProfileModel extends Profile {
     super.nameOwnerBank,
     super.branchBank,
     super.sourceIncome,
+    super.identityCardFileName,
     super.grossIncomePerYear,
+    super.subDistrict,
+    super.photoProfile,
   });
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
@@ -116,5 +119,8 @@ class ProfileModel extends Profile {
         branchBank,
         sourceIncome,
         grossIncomePerYear,
+        identityCardFileName,
+        subDistrict,
+        photoProfile,
       );
 }
