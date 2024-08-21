@@ -50,9 +50,16 @@ dependencies:
   get_it: ^7.7.0
   syncfusion_flutter_datepicker: ^22.2.11
   intl: ^0.18.1
+  icons_launcher: ^2.1.7
 
 
-
+icons_launcher:
+  image_path: "assets/images/logo.png"
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: true
 
 
 dev_dependencies:
